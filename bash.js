@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 
 var commands = require('./command');
 
@@ -7,12 +9,12 @@ var commands = require('./command');
 process.stdout.write('prompt > ');
 
 process.stdin.on('data', function (data) {
-  var cmd = data.toString().toLowerCase().trim(); // remove the newline
+  var arr = data.toString().trim().split(' ');
+  console.log(arr)
+  var cmd = arr.shift();
+  var argstr = arr.join(' ');
 
-  var output = commands[cmd];
-  process.stdout.write(output());
 
-  process.stdout.write('\nprompt > ');
-
+  commands[cmd](argstr);
 });
 
