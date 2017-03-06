@@ -1,17 +1,17 @@
 var fs = require('fs');
 
-exports.pwd = function() {
+exports.pwd = function(str) {
 	process.stdout.write(process.env.PWD);
 	process.stdout.write('\nprompt > ');
 };
 
-exports.date = function() {
+exports.date = function(str) {
 	var now = new Date();
 	process.stdout.write(now.toString());
 	process.stdout.write('\nprompt > ');
 };
 
-exports.ls = function() {
+exports.ls = function(str) {
 	 fs.readdir('.', function(err, files) {
 		if(err) throw err;
 		filesArr = files.forEach(function(file) {
@@ -29,5 +29,14 @@ exports.echo = function(str){
 
 	process.stdout.write(str);
 	process.stdout.write('\nprompt > ');
+}
+
+exports.cat = function(str){
+	fs.readFile('./'+str, (err, data) => {
+		if (err) throw err;
+		process.stdout.write(data);
+		process.stdout.write('\nprompt > ');
+
+	});
 
 }
