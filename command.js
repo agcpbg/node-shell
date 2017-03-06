@@ -22,6 +22,10 @@ exports.ls = function() {
 };
 
 exports.echo = function(str){
+	if(str[0] === '$'){
+		var name = str.slice(1);
+		process.stdout.write(process.env[name].toString());
+	}
 
 	process.stdout.write(str);
 	process.stdout.write('\nprompt > ');
